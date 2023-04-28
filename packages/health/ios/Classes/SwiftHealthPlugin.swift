@@ -56,6 +56,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
     let HEADACHE_MODERATE = "HEADACHE_MODERATE"
     let HEADACHE_SEVERE = "HEADACHE_SEVERE"
     let ELECTROCARDIOGRAM = "ELECTROCARDIOGRAM"
+    let RESPIRATORY_RATE = "RESPIRATORY_RATE"
     
     // Health Unit types
     // MOLE_UNIT_WITH_MOLAR_MASS, // requires molar mass input - not supported yet
@@ -104,6 +105,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
     let COUNT = "COUNT"
     let PERCENT = "PERCENT"
     let BEATS_PER_MINUTE = "BEATS_PER_MINUTE"
+    let BREATHS_PER_MINUTE = "BREATHS_PER_MINUTE"
     let MILLIGRAM_PER_DECILITER = "MILLIGRAM_PER_DECILITER"
     let UNKNOWN_UNIT = "UNKNOWN_UNIT"
     let NO_UNIT = "NO_UNIT"
@@ -471,8 +473,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "value": sample.quantity.doubleValue(for: unit!),
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-                        "source_name": sample.sourceRevision.source.name
+//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+//                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
@@ -510,8 +512,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "value": sample.value,
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-                        "source_name": sample.sourceRevision.source.name
+//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+//                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
@@ -530,8 +532,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "totalDistanceUnit": "METER",
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-                        "source_name": sample.sourceRevision.source.name
+//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+//                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 
@@ -556,8 +558,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "rightEarSensitivities": rightEarSensitivities,
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-                        "source_name": sample.sourceRevision.source.name
+//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+//                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
@@ -715,6 +717,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
         unitDict[COUNT] = HKUnit.count()
         unitDict[PERCENT] = HKUnit.percent()
         unitDict[BEATS_PER_MINUTE] = HKUnit.init(from: "count/min")
+        unitDict[BREATHS_PER_MINUTE] = HKUnit.init(from: "count/min")
         unitDict[MILLIGRAM_PER_DECILITER] = HKUnit.init(from: "mg/dL")
         unitDict[UNKNOWN_UNIT] = HKUnit.init(from: "")
         unitDict[NO_UNIT] = HKUnit.init(from: "")
@@ -839,6 +842,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
             dataTypesDict[SLEEP_AWAKE] = HKSampleType.categoryType(forIdentifier: .sleepAnalysis)!
             dataTypesDict[EXERCISE_TIME] = HKSampleType.quantityType(forIdentifier: .appleExerciseTime)!
             dataTypesDict[WORKOUT] = HKSampleType.workoutType()
+            dataTypesDict[RESPIRATORY_RATE] = HKSampleType.quantityType(forIdentifier: .respiratoryRate)!
             
             healthDataTypes = Array(dataTypesDict.values)
         }
