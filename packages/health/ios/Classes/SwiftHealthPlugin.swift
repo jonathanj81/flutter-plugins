@@ -473,8 +473,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "value": sample.quantity.doubleValue(for: unit!),
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-//                        "source_name": sample.sourceRevision.source.name
+                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
@@ -512,8 +512,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "value": sample.value,
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-//                        "source_name": sample.sourceRevision.source.name
+                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
@@ -532,8 +532,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "totalDistanceUnit": "METER",
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-//                        "source_name": sample.sourceRevision.source.name
+                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 
@@ -558,8 +558,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                         "rightEarSensitivities": rightEarSensitivities,
                         "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
                         "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
-//                        "source_id": sample.sourceRevision.source.bundleIdentifier,
-//                        "source_name": sample.sourceRevision.source.name
+                        "source_id": sample.sourceRevision.source.bundleIdentifier,
+                        "source_name": sample.sourceRevision.source.name
                     ]
                 }
                 DispatchQueue.main.async {
