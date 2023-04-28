@@ -238,7 +238,10 @@ class HealthFactory {
 
     // Align values to type in cases where the type defines the value.
     // E.g. SLEEP_IN_BED should have value 0
-    if (type == HealthDataType.SLEEP_ASLEEP ||
+    if (type == HealthDataType.SLEEP_ASLEEP_UNSPECIFIED ||
+        type == HealthDataType.SLEEP_ASLEEP_CORE ||
+        type == HealthDataType.SLEEP_ASLEEP_DEEP ||
+        type == HealthDataType.SLEEP_ASLEEP_REM ||
         type == HealthDataType.SLEEP_AWAKE ||
         type == HealthDataType.SLEEP_IN_BED ||
         type == HealthDataType.HEADACHE_NOT_PRESENT ||
