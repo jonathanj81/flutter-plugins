@@ -178,7 +178,7 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   HealthDataType.MINDFULNESS: HealthDataUnit.MINUTE,
   HealthDataType.EXERCISE_TIME: HealthDataUnit.MINUTE,
   HealthDataType.MOVING_TIME: HealthDataUnit.MINUTE,
-  HealthDataType.STANDING_TIME: HealthDataUnit.COUNT,
+  HealthDataType.STANDING_TIME: HealthDataUnit.MINUTE,
   HealthDataType.WORKOUT: HealthDataUnit.NO_UNIT,
 
   HealthDataType.HEADACHE_NOT_PRESENT: HealthDataUnit.MINUTE,
