@@ -21,6 +21,8 @@ enum HealthDataType {
   HEART_RATE_VARIABILITY_SDNN,
   HEIGHT,
   RESTING_HEART_RATE,
+  RESPIRATORY_RATE,
+  PERIPHERAL_PERFUSION_INDEX,
   STEPS,
   WAIST_CIRCUMFERENCE,
   WALKING_HEART_RATE,
@@ -37,6 +39,11 @@ enum HealthDataType {
   SLEEP_ASLEEP_DEEP,
   SLEEP_ASLEEP_REM,
   SLEEP_AWAKE,
+  SLEEP_LIGHT,
+  SLEEP_DEEP,
+  SLEEP_REM,
+  SLEEP_OUT_OF_BED,
+  SLEEP_SESSION,
   EXERCISE_TIME,
   STANDING_TIME,
   MOVING_TIME,
@@ -46,6 +53,7 @@ enum HealthDataType {
   HEADACHE_MODERATE,
   HEADACHE_SEVERE,
   HEADACHE_UNSPECIFIED,
+  NUTRITION,
   RESPIRATORY_RATE,
 
   // Heart Rate events (specific to Apple Watch)
@@ -56,6 +64,7 @@ enum HealthDataType {
   ELECTROCARDIOGRAM,
 }
 
+/// Access types for Health Data.
 enum HealthDataAccess {
   READ,
   WRITE,
@@ -87,6 +96,8 @@ const List<HealthDataType> _dataTypeKeysIOS = [
   HealthDataType.IRREGULAR_HEART_RATE_EVENT,
   HealthDataType.LOW_HEART_RATE_EVENT,
   HealthDataType.RESTING_HEART_RATE,
+  HealthDataType.RESPIRATORY_RATE,
+  HealthDataType.PERIPHERAL_PERFUSION_INDEX,
   HealthDataType.STEPS,
   HealthDataType.WAIST_CIRCUMFERENCE,
   HealthDataType.WALKING_HEART_RATE,
@@ -111,6 +122,7 @@ const List<HealthDataType> _dataTypeKeysIOS = [
   HealthDataType.HEADACHE_SEVERE,
   HealthDataType.HEADACHE_UNSPECIFIED,
   HealthDataType.ELECTROCARDIOGRAM,
+  HealthDataType.NUTRITION,
   HealthDataType.RESPIRATORY_RATE
 ];
 
@@ -131,10 +143,19 @@ const List<HealthDataType> _dataTypeKeysAndroid = [
   HealthDataType.MOVE_MINUTES,
   HealthDataType.DISTANCE_DELTA,
   HealthDataType.SLEEP_AWAKE,
-  HealthDataType.SLEEP_ASLEEP_UNSPECIFIED,
-  HealthDataType.SLEEP_IN_BED,
+  HealthDataType.SLEEP_ASLEEP,
+  HealthDataType.SLEEP_DEEP,
+  HealthDataType.SLEEP_LIGHT,
+  HealthDataType.SLEEP_REM,
+  HealthDataType.SLEEP_OUT_OF_BED,
+  HealthDataType.SLEEP_SESSION,
   HealthDataType.WATER,
   HealthDataType.WORKOUT,
+  HealthDataType.RESTING_HEART_RATE,
+  HealthDataType.FLIGHTS_CLIMBED,
+  HealthDataType.BASAL_ENERGY_BURNED,
+  HealthDataType.RESPIRATORY_RATE,
+  HealthDataType.NUTRITION,
 ];
 
 /// Maps a [HealthDataType] to a [HealthDataUnit].
@@ -156,7 +177,8 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   HealthDataType.ELECTRODERMAL_ACTIVITY: HealthDataUnit.SIEMEN,
   HealthDataType.FORCED_EXPIRATORY_VOLUME: HealthDataUnit.LITER,
   HealthDataType.HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
-  HealthDataType.RESPIRATORY_RATE: HealthDataUnit.BREATHS_PER_MINUTE,
+  HealthDataType.RESPIRATORY_RATE: HealthDataUnit.RESPIRATIONS_PER_MINUTE,
+  HealthDataType.PERIPHERAL_PERFUSION_INDEX: HealthDataUnit.PERCENT,
   HealthDataType.HEIGHT: HealthDataUnit.METER,
   HealthDataType.RESTING_HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
   HealthDataType.STEPS: HealthDataUnit.COUNT,
@@ -175,6 +197,12 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   HealthDataType.SLEEP_ASLEEP_DEEP: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_ASLEEP_REM: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_AWAKE: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_DEEP: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_REM: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_OUT_OF_BED: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_LIGHT: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_SESSION: HealthDataUnit.MINUTE,
+
   HealthDataType.MINDFULNESS: HealthDataUnit.MINUTE,
   HealthDataType.EXERCISE_TIME: HealthDataUnit.MINUTE,
   HealthDataType.MOVING_TIME: HealthDataUnit.MINUTE,
@@ -193,6 +221,8 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   HealthDataType.IRREGULAR_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
   HealthDataType.HEART_RATE_VARIABILITY_SDNN: HealthDataUnit.MILLISECOND,
   HealthDataType.ELECTROCARDIOGRAM: HealthDataUnit.VOLT,
+
+  HealthDataType.NUTRITION: HealthDataUnit.NO_UNIT,
 };
 
 const PlatformTypeJsonValue = {
@@ -275,7 +305,7 @@ enum HealthDataUnit {
 
   // Other units
   BEATS_PER_MINUTE,
-  BREATHS_PER_MINUTE,
+  RESPIRATIONS_PER_MINUTE,
   MILLIGRAM_PER_DECILITER,
   UNKNOWN_UNIT,
   NO_UNIT,
@@ -440,6 +470,15 @@ enum HealthWorkoutActivityType {
   OTHER,
 }
 
+enum MealType {
+  BREAKFAST,
+  LUNCH,
+  DINNER,
+  SNACK,
+  UNKNOWN,
+}
+
+/// Classifications for ECG readings.
 enum ElectrocardiogramClassification {
   NOT_SET,
   SINUS_RHYTHM,
@@ -451,6 +490,7 @@ enum ElectrocardiogramClassification {
   UNRECOGNIZED,
 }
 
+/// Extension to assign numbers to [ElectrocardiogramClassification]s
 extension ElectrocardiogramClassificationValue
     on ElectrocardiogramClassification {
   int get value {
