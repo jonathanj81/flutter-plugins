@@ -54,7 +54,6 @@ enum HealthDataType {
   HEADACHE_SEVERE,
   HEADACHE_UNSPECIFIED,
   NUTRITION,
-  RESPIRATORY_RATE,
 
   // Heart Rate events (specific to Apple Watch)
   HIGH_HEART_RATE_EVENT,
@@ -143,7 +142,6 @@ const List<HealthDataType> _dataTypeKeysAndroid = [
   HealthDataType.MOVE_MINUTES,
   HealthDataType.DISTANCE_DELTA,
   HealthDataType.SLEEP_AWAKE,
-  HealthDataType.SLEEP_ASLEEP,
   HealthDataType.SLEEP_DEEP,
   HealthDataType.SLEEP_LIGHT,
   HealthDataType.SLEEP_REM,
