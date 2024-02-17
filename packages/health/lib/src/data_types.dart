@@ -38,6 +38,7 @@ enum HealthDataType {
   SLEEP_ASLEEP_CORE,
   SLEEP_ASLEEP_DEEP,
   SLEEP_ASLEEP_REM,
+  SLEEP_ASLEEP,
   SLEEP_AWAKE,
   SLEEP_LIGHT,
   SLEEP_DEEP,
@@ -121,8 +122,7 @@ const List<HealthDataType> _dataTypeKeysIOS = [
   HealthDataType.HEADACHE_SEVERE,
   HealthDataType.HEADACHE_UNSPECIFIED,
   HealthDataType.ELECTROCARDIOGRAM,
-  HealthDataType.NUTRITION,
-  HealthDataType.RESPIRATORY_RATE
+  HealthDataType.NUTRITION
 ];
 
 /// List of data types available on Android
@@ -194,6 +194,7 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   HealthDataType.SLEEP_ASLEEP_CORE: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_ASLEEP_DEEP: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_ASLEEP_REM: HealthDataUnit.MINUTE,
+  HealthDataType.SLEEP_ASLEEP: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_AWAKE: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_DEEP: HealthDataUnit.MINUTE,
   HealthDataType.SLEEP_REM: HealthDataUnit.MINUTE,
