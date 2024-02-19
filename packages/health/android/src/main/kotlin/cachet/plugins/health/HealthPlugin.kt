@@ -1570,7 +1570,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        Log.i("pppp","ON-ATTACHED-TO-ACTIVITY called")
+        Log.i("FLUTTER_HEALTH::SUCCESS","ON-ATTACHED-TO-ACTIVITY called")
         if (channel == null) {
             return
         }
@@ -1676,7 +1676,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
     }
 
     private fun requestAuthorizationHC(call: MethodCall, result: Result) {
-        Log.i("pppp","REQUEST-AUTHORIZATION-HC called")
+        Log.d("FLUTTER_HEALTH::SUCCESS","REQUEST-AUTHORIZATION-HC called")
         val args = call.arguments as HashMap<*, *>
         val types = (args["types"] as? ArrayList<*>)?.filterIsInstance<String>()!!
         val permissions = (args["permissions"] as? ArrayList<*>)?.filterIsInstance<Int>()!!
@@ -1723,14 +1723,14 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
                 }
             }
         }
-        Log.i("pppp","REQUEST-AUTHORIZATION-HC, passed type checks")
+        Log.d("FLUTTER_HEALTH::SUCCESS","REQUEST-AUTHORIZATION-HC, passed type checks")
         
         if(healthConnectRequestPermissionsLauncher == null) {
             result.success(false)
-            Log.i("FLUTTER_HEALTH", "Permission launcher not found")
+            Log.d("FLUTTER_HEALTH", "Permission launcher not found")
             return;
         }
-        Log.i("pppp","REQUEST-AUTHORIZATION-HC, calling permission launcher with: ${permList.size}")
+        Log.d("FLUTTER_HEALTH::SUCCESS","REQUEST-AUTHORIZATION-HC, calling permission launcher with: ${permList.size}")
 
 
         healthConnectRequestPermissionsLauncher!!.launch(permList.toSet());
