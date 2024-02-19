@@ -759,14 +759,19 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
      * Save a data type in Google Fit
      */
     private fun writeData(call: MethodCall, result: Result) {
+        Log.i("PPPP", "HealthPlugin, writeData called: $useHealthConnectIfAvailable, $healthConnectAvailable, $result")
         if (useHealthConnectIfAvailable && healthConnectAvailable) {
             writeHCData(call, result)
             return
         }
+        Log.i("PPPP", "HealthPlugin, writeData, passed check for writeHCData")
         if (context == null) {
+            Log.i("PPPP", "HealthPlugin, writeData, context null, result false")
             result.success(false)
             return
         }
+
+        Log.i("PPPP", "HealthPlugin, writeData, continuing with regular write call")
 
         val type = call.argument<String>("dataTypeKey")!!
         val startTime = call.argument<Long>("startTime")!!
@@ -2068,6 +2073,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
 
     //TODO rewrite sleep to fit new update better --> compare with Apple and see if we should not adopt a single type with attached stages approach
     fun writeHCData(call: MethodCall, result: Result) {
+        Log.i("PPPP", "HealthPlugin, writeHCData called")
         val type = call.argument<String>("dataTypeKey")!!
         val startTime = call.argument<Long>("startTime")!!
         val endTime = call.argument<Long>("endTime")!!
@@ -2234,11 +2240,13 @@ class HealthPlugin(private var channel: MethodChannel? = null) :
             NUTRITION -> throw IllegalArgumentException("You must use the [writeMeal] API ")
             else -> throw IllegalArgumentException("The type $type was not supported by the Health plugin or you must use another API ")
         }
+        Log.i("PPPP", "HealthPlugin, writeHCData, record tracked: $record")
         scope.launch {
             try {
                 healthConnectClient.insertRecords(listOf(record))
                 result.success(true)
             } catch (e: Exception) {
+                Log.i("PPPP", "HealthPlugin, writeHCData, exception inserting records: $e")
                 result.success(false)
             }
         }

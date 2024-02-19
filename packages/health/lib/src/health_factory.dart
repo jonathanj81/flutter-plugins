@@ -238,6 +238,8 @@ class HealthFactory {
     DateTime endTime, {
     HealthDataUnit? unit,
   }) async {
+    final Logger _logger = Logger();
+    _logger.i("PPPP, writeHealthData called: $unit, $type, $value, $startTime, $endTime");
     if (type == HealthDataType.WORKOUT)
       throw ArgumentError(
           "Adding workouts should be done using the writeWorkoutData method.");
@@ -252,6 +254,8 @@ class HealthFactory {
         _platformType == PlatformType.IOS)
       throw ArgumentError(
           "$type - iOS doesnt support writing this data type in HealthKit");
+
+    _logger.i("PPPP, writeHealthData, passed checks against bad data types");
 
     // Assign default unit if not specified
     unit ??= _dataTypeToUnit[type]!;
@@ -273,6 +277,7 @@ class HealthFactory {
         type == HealthDataType.HEADACHE_UNSPECIFIED) {
       value = _alignValue(type).toDouble();
     }
+    _logger.i("PPPP, writeHealthData, passed sleep type alignments");
 
     Map<String, dynamic> args = {
       'value': value,
